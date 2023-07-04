@@ -72,3 +72,21 @@ Plugins/*/Intermediate/*
 
 # Cache files for the editor to use
 DerivedDataCache/*
+
+*.uasset
+*.uprojectdirs
+*.log
+*.bak
+*.sav
+*.png
+*.jpg
+*.tga
+*.mp3
+*.wav
+*.ogg
+
+!Content/Blueprints/**
+!Content/Maps/**
+!Content/Landscape/**
+!Content/Mixamo/**
+!Source/**
