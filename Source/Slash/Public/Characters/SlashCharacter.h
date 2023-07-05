@@ -67,8 +67,8 @@ protected:
 	* Play montage functions
 	*/
 
-	virtual void PlayAttackMontage() override;
 	void PlayEquipMontage(FName SectionName);
+	// My code
 	void PlayMontage(UAnimMontage* MontageName, const FName& SectionName);
 
 	virtual void AttackEnd() override;
@@ -76,11 +76,6 @@ protected:
 	virtual bool CanAttack() override;
 	bool CanDisarm();
 	bool CanArm();
-
-	UPROPERTY(EditAnywhere, Category = Montages)
-	TArray<FName> MontageSectionNames;
-
-	FName GetRandomSectionName(TArray<FName>& SectionNames);
 
 	UFUNCTION(BlueprintCallable)
 	void Disarm();

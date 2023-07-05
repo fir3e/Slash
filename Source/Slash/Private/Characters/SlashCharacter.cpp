@@ -173,20 +173,6 @@ bool ASlashCharacter::CanArm()
 		EquippedWeapon;
 }
 
-FName ASlashCharacter::GetRandomSectionName(TArray<FName>& SectionNames)
-{
-	if (SectionNames.Num() > 0)
-	{
-		int32 RandomIndex = FMath::RandRange(0, SectionNames.Num() - 1);
-		FName RandomElement = SectionNames[RandomIndex];
-		return RandomElement;
-	}
-	else
-	{
-		return FName("Default");
-	}
-}
-
 void ASlashCharacter::Disarm()
 {
 	if (EquippedWeapon)
@@ -206,35 +192,6 @@ void ASlashCharacter::Arm()
 void ASlashCharacter::FinishEquipping()
 {
 	ActionState = EActionState::EAS_Unoccupied;
-}
-
-void ASlashCharacter::PlayAttackMontage()
-{
-	Super::PlayAttackMontage();
-
-	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
-
-	if (AnimInstance && AttackMontage)
-	{
-		AnimInstance->Montage_Play(AttackMontage);
-		const int32 Selection = FMath::RandRange(0, 2);
-		FName SectionName = FName();
-		switch (Selection)
-		{
-		case 0:
-			SectionName = FName("Attack1");
-			break;
-		case 1:
-			SectionName = FName("Attack2");
-			break;
-		case 2:
-			SectionName = FName("Attack3");
-			break;
-		default:
-			break;
-		}
-		AnimInstance->Montage_JumpToSection(SectionName, AttackMontage);
-	}
 }
 
 void ASlashCharacter::PlayEquipMontage(FName SectionName)
