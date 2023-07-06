@@ -28,6 +28,10 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	//virtual void Jump() override;
 
+	/** <IHitInterface> */
+	virtual void GetHit_Implementation(const FVector& ImpactPoint) override;
+	/** </IHitInterface> */
+
 protected:
 	virtual void BeginPlay() override;
 

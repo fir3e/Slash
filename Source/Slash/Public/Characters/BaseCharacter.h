@@ -52,19 +52,19 @@ private:
 	void PlayMontageSection(UAnimMontage* Montage, const FName& SectionName);
 	int32 PlayRandomMontageSection(UAnimMontage* Montage, const TArray<FName>& SectionNames);
 
-	UPROPERTY(EditAnywhere, Category = Sounds)
+	UPROPERTY(EditAnywhere, Category = Combat)
 	TObjectPtr <USoundBase> HitSound;
 
-	UPROPERTY(EditAnywhere, Category = VisualEffects)
+	UPROPERTY(EditAnywhere, Category = Combat)
 	TObjectPtr < UParticleSystem> HitParticles;
 
-	UPROPERTY(EditDefaultsOnly, Category = Montages)
+	UPROPERTY(EditDefaultsOnly, Category = Combat)
 	TObjectPtr <UAnimMontage> AttackMontage;
 
-	UPROPERTY(EditDefaultsOnly, Category = Montages)
+	UPROPERTY(EditDefaultsOnly, Category = Combat)
 	TObjectPtr <UAnimMontage> HitReactMontage;
 
-	UPROPERTY(EditDefaultsOnly, Category = Montages)
+	UPROPERTY(EditDefaultsOnly, Category = Combat)
 	TObjectPtr <UAnimMontage> DeathMontage;
 
 	UPROPERTY(EditAnywhere, Category = Combat)
