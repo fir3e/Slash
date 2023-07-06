@@ -25,71 +25,60 @@ class SLASH_API ASlashCharacter : public ABaseCharacter
 
 public:
 	ASlashCharacter();
-	virtual void Tick(float DeltaTime) override;
-
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	//virtual void Jump() override;
 
 protected:
 	virtual void BeginPlay() override;
 
-	/**
-	* Callbacks for Inputs
-	*/
-
-	UPROPERTY(EditAnywhere, Category = Input)
-		TObjectPtr<UInputMappingContext> SlashContext;
-
-	UPROPERTY(EditAnywhere, Category = Input)
-		TObjectPtr<UInputAction> MovementAction;
-
-	UPROPERTY(EditAnywhere, Category = Input)
-		TObjectPtr<UInputAction> LookAction;
-
-	UPROPERTY(EditAnywhere, Category = Input)
-		TObjectPtr<UInputAction> JumpAction;
-
-	UPROPERTY(EditAnywhere, Category = Input)
-		TObjectPtr<UInputAction> EKeyAction;
-
-	UPROPERTY(EditAnywhere, Category = Input)
-		TObjectPtr<UInputAction> AttackAction;
-
-	UPROPERTY(EditAnywhere, Category = Input)
-		TObjectPtr<UInputAction> DodgeAction;
-
+	/** Callbacks for Inputs */
 	void Move(const FInputActionValue& Value);
 	void Look(const FInputActionValue& Value);
 	void EKeyPressed();
+
+	/** Combat */
 	virtual void Attack() override;
-
-	/**
-	* Play montage functions
-	*/
-
-	void PlayEquipMontage(FName SectionName);
-	// My code
-	void PlayMontage(UAnimMontage* MontageName, const FName& SectionName);
-
+	void EquipWeapon(AWeapon* Weapon);
 	virtual void AttackEnd() override;
-
 	virtual bool CanAttack() override;
 	bool CanDisarm();
 	bool CanArm();
-
-	UFUNCTION(BlueprintCallable)
 	void Disarm();
+	void Arm();
+	void PlayEquipMontage(FName SectionName);
 
 	UFUNCTION(BlueprintCallable)
-	void Arm();
+	void AttachWeaponToBack();
+
+	UFUNCTION(BlueprintCallable)
+	void AttachWeaponToHand();
 
 	UFUNCTION(BlueprintCallable)
 	void FinishEquipping();
 
+	UPROPERTY(EditAnywhere, Category = Input)
+	TObjectPtr<UInputMappingContext> SlashContext;
+
+	UPROPERTY(EditAnywhere, Category = Input)
+	TObjectPtr<UInputAction> MovementAction;
+
+	UPROPERTY(EditAnywhere, Category = Input)
+	TObjectPtr<UInputAction> LookAction;
+
+	UPROPERTY(EditAnywhere, Category = Input)
+	TObjectPtr<UInputAction> JumpAction;
+
+	UPROPERTY(EditAnywhere, Category = Input)
+	TObjectPtr<UInputAction> EKeyAction;
+
+	UPROPERTY(EditAnywhere, Category = Input)
+	TObjectPtr<UInputAction> AttackAction;
+
+	UPROPERTY(EditAnywhere, Category = Input)
+	TObjectPtr<UInputAction> DodgeAction;
+
 private:
-	ECharacterState CharacterState = ECharacterState::ECS_Unequipped;
-	UPROPERTY(BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
-	EActionState ActionState = EActionState::EAS_Unoccupied;
+	/** Character componenets */
 
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr <USpringArmComponent> SpringArm;
@@ -108,6 +97,12 @@ private:
 
 	UPROPERTY(EditDefaultsOnly, Category = Montages)
 	TObjectPtr <UAnimMontage> EquipMontage;
+
+	ECharacterState CharacterState = ECharacterState::ECS_Unequipped;
+
+	UPROPERTY(BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	EActionState ActionState = EActionState::EAS_Unoccupied;
+
 public:
 	FORCEINLINE void SetOverlappingItem(AItem* Item) { OverlappingItem = Item; };
 	FORCEINLINE ECharacterState GetCharacterState() const { return CharacterState; };
