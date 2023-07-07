@@ -89,8 +89,7 @@ void AWeapon::OnBoxOverlap(UPrimitiveComponent* OverlappedComponent, AActor* Oth
 		if (ActorIsSameType(BoxHit.GetActor())) return;
 
 		UGameplayStatics::ApplyDamage(BoxHit.GetActor(), Damage, GetInstigator()->GetController(), this, UDamageType::StaticClass());
-		const FVector AttackerLocation = GetOwner()->GetActorLocation();
-		ExecuteGetHit(BoxHit, AttackerLocation);
+		ExecuteGetHit(BoxHit);
 		CreateFields(BoxHit.ImpactPoint);
 	}
 }
@@ -100,12 +99,12 @@ bool AWeapon::ActorIsSameType(AActor* OtherActor)
 	return GetOwner()->ActorHasTag(TEXT("Enemy")) && OtherActor->ActorHasTag(TEXT("Enemy"));
 }
 
-void AWeapon::ExecuteGetHit(FHitResult& BoxHit, const FVector& AttackerLocation)
+void AWeapon::ExecuteGetHit(FHitResult& BoxHit)
 {
 	IHitInterface* HitInterface = Cast<IHitInterface>(BoxHit.GetActor());
 	if (HitInterface)
 	{
-		HitInterface->Execute_GetHit(BoxHit.GetActor(), BoxHit.ImpactPoint, AttackerLocation);
+		HitInterface->Execute_GetHit(BoxHit.GetActor(), BoxHit.ImpactPoint);
 	}
 }
 

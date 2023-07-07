@@ -23,10 +23,10 @@ public:
 
 protected:
 	virtual void BeginPlay() override;
-	virtual void GetHit_Implementation(const FVector& ImpactPoint, const FVector& AttackerLocation) override;
+	virtual void GetHit_Implementation(const FVector& ImpactPoint) override;
 	virtual void Attack();
 	virtual void Die();
-	void DirectionHitReact(const FVector& ImpactPoint, const FVector& AttackerLocation);
+	void DirectionHitReact(const FVector& ImpactPoint);
 	virtual void HandleDamage(float DamageAmount);
 	void PlayHitSound(const FVector& ImpactPoint);
 	void SpawnHitParticles(const FVector& ImpactPoint);

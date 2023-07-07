@@ -64,9 +64,9 @@ void AEnemy::Destroyed()
 	}
 }
 
-void AEnemy::GetHit_Implementation(const FVector& ImpactPoint, const FVector& AttackerLocation)
+void AEnemy::GetHit_Implementation(const FVector& ImpactPoint)
 {
-	Super::GetHit_Implementation(ImpactPoint, AttackerLocation);
+	Super::GetHit_Implementation(ImpactPoint);
 	ShowHealthBar();
 }
 

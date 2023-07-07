@@ -22,11 +22,11 @@ void ABaseCharacter::BeginPlay()
 	
 }
 
-void ABaseCharacter::GetHit_Implementation(const FVector& ImpactPoint, const FVector& AttackerLocation)
+void ABaseCharacter::GetHit_Implementation(const FVector& ImpactPoint)
 {
 	if (IsAlive())
 	{
-		DirectionHitReact(ImpactPoint, AttackerLocation);
+		DirectionHitReact(ImpactPoint);
 	}
 	else Die();
 
@@ -54,12 +54,12 @@ void ABaseCharacter::PlayHitReactMontage(const FName& SectionName)
 	}
 }
 
-void ABaseCharacter::DirectionHitReact(const FVector& ImpactPoint, const FVector& AttackerLocation)
+void ABaseCharacter::DirectionHitReact(const FVector& ImpactPoint)
 {
 	const FVector Forward = GetActorForwardVector();
 	//const FVector PlayerLoc = GetWorld()->GetFirstPlayerController()->GetPawn()->GetActorLocation();
-	const FVector ImpactLowered(AttackerLocation.X, AttackerLocation.Y, GetActorLocation().Z);
-	//const FVector ImpactLowered(ImpactPoint.X, ImpactPoint.Y, GetActorLocation().Z);
+	//const FVector ImpactLowered(PlayerLoc.X, PlayerLoc.Y, GetActorLocation().Z);
+	const FVector ImpactLowered(ImpactPoint.X, ImpactPoint.Y, GetActorLocation().Z);
 	const FVector ToHit = (ImpactLowered - GetActorLocation()).GetSafeNormal();
 
 	// Forward * ToHit = |Forward||ToHit| * cos(theta)

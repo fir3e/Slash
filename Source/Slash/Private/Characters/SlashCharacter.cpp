@@ -65,9 +65,9 @@ void ASlashCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 
 }
 
-void ASlashCharacter::GetHit_Implementation(const FVector& ImpactPoint, const FVector& AttackerLocation)
+void ASlashCharacter::GetHit_Implementation(const FVector& ImpactPoint)
 {
-	Super::GetHit_Implementation(ImpactPoint, AttackerLocation);
+	Super::GetHit_Implementation(ImpactPoint);
 }
 
 void ASlashCharacter::BeginPlay()
