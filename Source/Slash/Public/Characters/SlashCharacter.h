@@ -29,7 +29,7 @@ public:
 	//virtual void Jump() override;
 
 	/** <IHitInterface> */
-	virtual void GetHit_Implementation(const FVector& ImpactPoint) override;
+	virtual void GetHit_Implementation(const FVector& ImpactPoint, const FVector& AttackerLocation) override;
 	/** </IHitInterface> */
 
 protected:

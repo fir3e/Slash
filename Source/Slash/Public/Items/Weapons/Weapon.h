@@ -32,7 +32,7 @@ protected:
 
 	bool ActorIsSameType(AActor* OtherActor);
 
-	void ExecuteGetHit(FHitResult& BoxHit);
+	void ExecuteGetHit(FHitResult& BoxHit, const FVector& AttackerLocation);
 
 	UFUNCTION(BlueprintImplementableEvent)
 	void CreateFields(const FVector& FieldLocation);
