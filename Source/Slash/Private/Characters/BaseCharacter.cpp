@@ -22,11 +22,11 @@ void ABaseCharacter::BeginPlay()
 	
 }
 
-void ABaseCharacter::GetHit_Implementation(const FVector& ImpactPoint)
+void ABaseCharacter::GetHit_Implementation(const FVector& ImpactPoint, AActor* Hitter)
 {
-	if (IsAlive())
+	if (IsAlive() && Hitter)
 	{
-		DirectionHitReact(ImpactPoint);
+		DirectionHitReact(Hitter->GetActorLocation());
 	}
 	else Die();
 
