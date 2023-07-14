@@ -16,6 +16,7 @@ class UCameraComponent;
 class UGroomComponent;
 class AItem;
 class UAnimMontage;
+class USlashOverlay;
 
 
 UCLASS()
@@ -87,6 +88,9 @@ protected:
 	TObjectPtr<UInputAction> DodgeAction;
 
 private:
+
+	void InitializeSlashOverlay();
+	
 	/** Character componenets */
 
 	UPROPERTY(VisibleAnywhere)
@@ -111,6 +115,9 @@ private:
 
 	UPROPERTY(BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	EActionState ActionState = EActionState::EAS_Unoccupied;
+
+	UPROPERTY()
+	USlashOverlay* SlashOverlay;
 
 public:
 	FORCEINLINE void SetOverlappingItem(AItem* Item) { OverlappingItem = Item; };

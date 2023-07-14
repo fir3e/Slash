@@ -12,9 +12,12 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "GroomComponent.h"
+#include "Components/AttributeComponent.h"
 #include "Items/Item.h"
 #include "Items/Weapons/Weapon.h"
 #include "Animation/AnimMontage.h"
+#include "HUD/SlashHUD.h"
+#include "HUD/SlashOverlay.h"
 
 ASlashCharacter::ASlashCharacter()
 {
@@ -92,6 +95,8 @@ void ASlashCharacter::BeginPlay()
 	}
 
 	Tags.Add(FName("EngageableTarget"));
+	InitializeSlashOverlay();
+
 }
 
 void ASlashCharacter::Move(const FInputActionValue& Value)
@@ -228,4 +233,24 @@ void ASlashCharacter::FinishEquipping()
 void ASlashCharacter::HitReactEnd()
 {
 	ActionState = EActionState::EAS_Unoccupied;
+}
+
+void ASlashCharacter::InitializeSlashOverlay()
+{
+	APlayerController* PlayerController = Cast<APlayerController>(GetController());
+	if (PlayerController)
+	{
+		ASlashHUD* SlashHUD = Cast<ASlashHUD>(PlayerController->GetHUD());
+		if (SlashHUD)
+		{
+			SlashOverlay = SlashHUD->GetSlashOverlay();
+			if (SlashOverlay && Attributes)
+			{
+				SlashOverlay->SetHealthBarPercent(Attributes->GetHealthPercent());
+				SlashOverlay->SetStaminaBarPercent(1.f);
+				SlashOverlay->SetGold(0);
+				SlashOverlay->SetSouls(0);
+			}
+		}
+	}
 }
