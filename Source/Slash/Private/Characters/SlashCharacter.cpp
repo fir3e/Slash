@@ -88,7 +88,10 @@ void ASlashCharacter::GetHit_Implementation(const FVector& ImpactPoint, AActor* 
 	Super::GetHit_Implementation(ImpactPoint, Hitter);
 
 	SetWeaponCollisionEnabled(ECollisionEnabled::NoCollision);
-	ActionState = EActionState::EAS_HitReaction;
+	if (Attributes && Attributes->GetHealthPercent() > 0.f)
+	{
+		ActionState = EActionState::EAS_HitReaction;
+	}
 }
 
 void ASlashCharacter::BeginPlay()
@@ -216,6 +219,14 @@ void ASlashCharacter::PlayEquipMontage(FName SectionName)
 		AnimInstance->Montage_Play(EquipMontage);
 		AnimInstance->Montage_JumpToSection(SectionName, EquipMontage);
 	}
+}
+
+void ASlashCharacter::Die()
+{
+	Super::Die();
+
+	ActionState = EActionState::EAS_Dead;
+	DisableMeshCollision();
 }
 
 void ASlashCharacter::AttachWeaponToBack()

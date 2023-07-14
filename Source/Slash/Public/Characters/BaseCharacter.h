@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Interfaces/HitInterface.h"
+#include "Characters/CharacterTypes.h"
 #include "BaseCharacter.generated.h"
 
 class USoundBase;
@@ -33,6 +34,7 @@ protected:
 	void DisableCapsule();
 	virtual bool CanAttack();
 	bool IsAlive();
+	void DisableMeshCollision();
 
 	/** Montage */
 	void PlayHitReactMontage(const FName& SectionName);
@@ -41,51 +43,56 @@ protected:
 	void StopAttackMontage();
 
 	UFUNCTION(BlueprintCallable)
-	FVector GetTranslationWarpTarget();
+		FVector GetTranslationWarpTarget();
 
 	UFUNCTION(BlueprintCallable)
-	FVector GetRotationWarpTarget();
+		FVector GetRotationWarpTarget();
 
 	UFUNCTION(BlueprintCallable)
-	virtual void AttackEnd();
+		virtual void AttackEnd();
 
 	UFUNCTION(BlueprintCallable)
-	void SetWeaponCollisionEnabled(ECollisionEnabled::Type CollisionEnabled);
+		void SetWeaponCollisionEnabled(ECollisionEnabled::Type CollisionEnabled);
 
 	UPROPERTY(VisibleAnywhere, Category = Weapon)
-	TObjectPtr <AWeapon> EquippedWeapon;
+		TObjectPtr <AWeapon> EquippedWeapon;
 
 	UPROPERTY(VisibleAnywhere)
-	UAttributeComponent* Attributes;
+		UAttributeComponent* Attributes;
 
 	UPROPERTY(BlueprintReadOnly, Category = Combat)
-	AActor* CombatTarget;
+		AActor* CombatTarget;
 
 	UPROPERTY(EditAnywhere, Category = Combat)
-	double WarpTargetDistance = 75.f;
+		double WarpTargetDistance = 75.f;
+
+	UPROPERTY(BlueprintReadOnly)
+		TEnumAsByte<EDeathPose> DeathPose;
 
 private:
 	void PlayMontageSection(UAnimMontage* Montage, const FName& SectionName);
 	int32 PlayRandomMontageSection(UAnimMontage* Montage, const TArray<FName>& SectionNames);
 
 	UPROPERTY(EditAnywhere, Category = Combat)
-	TObjectPtr <USoundBase> HitSound;
+		TObjectPtr <USoundBase> HitSound;
 
 	UPROPERTY(EditAnywhere, Category = Combat)
-	TObjectPtr < UParticleSystem> HitParticles;
+		TObjectPtr < UParticleSystem> HitParticles;
 
 	UPROPERTY(EditDefaultsOnly, Category = Combat)
-	TObjectPtr <UAnimMontage> AttackMontage;
+		TObjectPtr <UAnimMontage> AttackMontage;
 
 	UPROPERTY(EditDefaultsOnly, Category = Combat)
-	TObjectPtr <UAnimMontage> HitReactMontage;
+		TObjectPtr <UAnimMontage> HitReactMontage;
 
 	UPROPERTY(EditDefaultsOnly, Category = Combat)
-	TObjectPtr <UAnimMontage> DeathMontage;
+		TObjectPtr <UAnimMontage> DeathMontage;
 
 	UPROPERTY(EditAnywhere, Category = Combat)
-	TArray<FName> AttackMontageSections;
+		TArray<FName> AttackMontageSections;
 
 	UPROPERTY(EditAnywhere, Category = Combat)
-	TArray<FName> DeathMontageSections;
+		TArray<FName> DeathMontageSections;
+public:
+	FORCEINLINE TEnumAsByte<EDeathPose> GetDeathPose() const { return DeathPose; }
 };
