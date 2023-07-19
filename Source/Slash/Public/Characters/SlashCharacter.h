@@ -6,6 +6,7 @@
 #include "BaseCharacter.h"
 #include "InputActionValue.h"
 #include "CharacterTypes.h"
+#include "Interfaces/PickupInterface.h"
 #include "SlashCharacter.generated.h"
 
 class UInputMappingContext;
@@ -15,12 +16,13 @@ class USpringArmComponent;
 class UCameraComponent;
 class UGroomComponent;
 class AItem;
+class ASoul;
 class UAnimMontage;
 class USlashOverlay;
 
 
 UCLASS()
-class SLASH_API ASlashCharacter : public ABaseCharacter
+class SLASH_API ASlashCharacter : public ABaseCharacter, public IPickupInterface
 {
 	GENERATED_BODY()
 
@@ -34,6 +36,11 @@ public:
 	/** <IHitInterface> */
 	virtual void GetHit_Implementation(const FVector& ImpactPoint, AActor* Hitter) override;
 	/** </IHitInterface> */
+
+	/** <IPickupInterface> */
+	virtual void SetOverlappingItem(AItem* Item) override;
+	virtual void AddSouls(ASoul* Soul) override;
+	/** </IPickupInterface> */
 
 protected:
 	virtual void BeginPlay() override;
@@ -122,7 +129,6 @@ private:
 	USlashOverlay* SlashOverlay;
 
 public:
-	FORCEINLINE void SetOverlappingItem(AItem* Item) { OverlappingItem = Item; }
 	FORCEINLINE ECharacterState GetCharacterState() const { return CharacterState; }
 	FORCEINLINE EActionState GetActionState() const { return ActionState; }
 };
