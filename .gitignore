@@ -89,6 +89,7 @@ DerivedDataCache/*
 
 !Content/Blueprints/**
 !Content/Maps/**
+!Content/Effects/**
 !Content/Landscape/**
 !Content/Mixamo/**
 !Source/**
