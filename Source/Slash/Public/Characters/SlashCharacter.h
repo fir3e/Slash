@@ -19,6 +19,7 @@ class AItem;
 class ASoul;
 class UAnimMontage;
 class USlashOverlay;
+class ATreasure;
 
 
 UCLASS()
@@ -40,6 +41,7 @@ public:
 	/** <IPickupInterface> */
 	virtual void SetOverlappingItem(AItem* Item) override;
 	virtual void AddSouls(ASoul* Soul) override;
+	virtual void AddGold(ATreasure* Treasure) override;
 	/** </IPickupInterface> */
 
 protected:
