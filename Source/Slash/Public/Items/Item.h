@@ -7,6 +7,8 @@
 #include "Item.generated.h"
 
 class USphereComponent;
+class UNiagaraComponent;
+class UNiagaraSystem;
 
 enum class EItemState : uint8
 {
@@ -26,43 +28,51 @@ protected:
 	virtual void BeginPlay() override;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Sine Parameters")
-	float Amplitude = 0.25f;
+		float Amplitude = 0.25f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Sine Parameters")
-	float TimeConstant = 5.f;
+		float TimeConstant = 5.f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Sine Parameters")
-	float RotationRate = 30.f;
+		float RotationRate = 30.f;
 
 	UFUNCTION(BlueprintPure)
-	float TransformedSin();
+		float TransformedSin();
 
 	UFUNCTION(BlueprintPure)
-	float TransformedCos();
+		float TransformedCos();
 
 	template<typename T>
 	T Avg(T First, T Second);
 
 	UFUNCTION()
-	virtual void OnSphereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+		virtual void OnSphereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
 	UFUNCTION()
-	virtual void OnSphereEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+		virtual void OnSphereEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+
+	virtual void SpawnPickupSystem();
+	virtual void SpawnPickupSound();
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	TObjectPtr<UStaticMeshComponent> ItemMesh;
+		TObjectPtr<UStaticMeshComponent> ItemMesh;
 
 	EItemState ItemState = EItemState::EIS_Hovering;
 
 	UPROPERTY(VisibleAnywhere)
-	TObjectPtr<USphereComponent> Sphere;
+		TObjectPtr<USphereComponent> Sphere;
 
 	UPROPERTY(EditAnywhere)
-	class UNiagaraComponent* ItemEffect;
+		UNiagaraComponent* ItemEffect;
+
+	UPROPERTY(EditAnywhere)
+		USoundBase* PickupSound;
 private:
 	UPROPERTY(VisibleInstanceOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-	float RunningTime;
+		float RunningTime;
 
+	UPROPERTY(EditAnywhere)
+		UNiagaraSystem* PickupEffect;
 };
 
 template<typename T>
