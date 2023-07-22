@@ -40,34 +40,38 @@ protected:
 	void PlayHitReactMontage(const FName& SectionName);
 	virtual int32 PlayAttackMontage();
 	virtual int32 PlayDeathMontage();
+	virtual void PlayDodgeMontage();
 	void StopAttackMontage();
 
 	UFUNCTION(BlueprintCallable)
-		FVector GetTranslationWarpTarget();
+	FVector GetTranslationWarpTarget();
 
 	UFUNCTION(BlueprintCallable)
-		FVector GetRotationWarpTarget();
+	FVector GetRotationWarpTarget();
 
 	UFUNCTION(BlueprintCallable)
-		virtual void AttackEnd();
+	virtual void AttackEnd();
 
 	UFUNCTION(BlueprintCallable)
-		void SetWeaponCollisionEnabled(ECollisionEnabled::Type CollisionEnabled);
+	virtual void DodgeEnd();
+
+	UFUNCTION(BlueprintCallable)
+	void SetWeaponCollisionEnabled(ECollisionEnabled::Type CollisionEnabled);
 
 	UPROPERTY(VisibleAnywhere, Category = Weapon)
-		TObjectPtr <AWeapon> EquippedWeapon;
+	TObjectPtr <AWeapon> EquippedWeapon;
 
 	UPROPERTY(VisibleAnywhere)
-		UAttributeComponent* Attributes;
+	UAttributeComponent* Attributes;
 
 	UPROPERTY(BlueprintReadOnly, Category = Combat)
-		AActor* CombatTarget;
+	AActor* CombatTarget;
 
 	UPROPERTY(EditAnywhere, Category = Combat)
-		double WarpTargetDistance = 75.f;
+	double WarpTargetDistance = 75.f;
 
 	UPROPERTY(BlueprintReadOnly)
-		TEnumAsByte<EDeathPose> DeathPose;
+	TEnumAsByte<EDeathPose> DeathPose;
 
 private:
 	void PlayMontageSection(UAnimMontage* Montage, const FName& SectionName);
@@ -87,6 +91,9 @@ private:
 
 	UPROPERTY(EditDefaultsOnly, Category = Combat)
 		TObjectPtr <UAnimMontage> DeathMontage;
+
+	UPROPERTY(EditDefaultsOnly, Category = Combat)
+		TObjectPtr <UAnimMontage> DodgeMontage;
 
 	UPROPERTY(EditAnywhere, Category = Combat)
 		TArray<FName> AttackMontageSections;
