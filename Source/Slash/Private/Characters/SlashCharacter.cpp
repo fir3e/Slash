@@ -20,6 +20,7 @@
 #include "HUD/SlashOverlay.h"
 #include "Items/Soul.h"
 #include "Items/Treasure.h"
+#include "Items/EnergyItem.h"
 
 ASlashCharacter::ASlashCharacter()
 {
@@ -126,6 +127,15 @@ void ASlashCharacter::AddGold(ATreasure* Treasure)
 	{
 		Attributes->AddGold(Treasure->GetGold());
 		SlashOverlay->SetGold(Attributes->GetGold());
+	}
+}
+
+void ASlashCharacter::AddEnergy(AEnergyItem* EnergyItem)
+{
+	if (Attributes && SlashOverlay)
+	{
+		Attributes->AddEnergy(EnergyItem->GetEnergy());
+		SlashOverlay->SetStaminaBarPercent(Attributes->GetStaminaPercent());
 	}
 }
 

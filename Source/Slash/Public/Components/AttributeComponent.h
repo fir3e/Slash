@@ -51,6 +51,7 @@ private:
 public:
 	void ReceiveDamage(float Damage);
 	void UseStamina(float StaminaCost);
+	void AddEnergy(float Energy);
 	float GetHealthPercent();
 	float GetStaminaPercent();
 	bool IsAlive();
