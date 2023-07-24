@@ -21,6 +21,7 @@
 #include "Items/Soul.h"
 #include "Items/Treasure.h"
 #include "Items/EnergyItem.h"
+#include "Items/HealthPickup.h"
 
 ASlashCharacter::ASlashCharacter()
 {
@@ -136,6 +137,15 @@ void ASlashCharacter::AddEnergy(AEnergyItem* EnergyItem)
 	{
 		Attributes->AddEnergy(EnergyItem->GetEnergy());
 		SlashOverlay->SetStaminaBarPercent(Attributes->GetStaminaPercent());
+	}
+}
+
+void ASlashCharacter::AddHealth(AHealthPickup* HealthPickup)
+{
+	if (Attributes && SlashOverlay)
+	{
+		Attributes->AddHealth(HealthPickup->GetHealthAmount());
+		SlashOverlay->SetHealthBarPercent(Attributes->GetHealthPercent());
 	}
 }
 

@@ -26,4 +26,5 @@ public:
 	virtual void AddSouls(class ASoul* Soul);
 	virtual void AddGold(class ATreasure* Treasure);
 	virtual void AddEnergy(class AEnergyItem* EnergyItem);
+	virtual void AddHealth(class AHealthPickup* HealthPickup);
 };

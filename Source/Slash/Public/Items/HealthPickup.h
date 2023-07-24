@@ -4,21 +4,21 @@
 
 #include "CoreMinimal.h"
 #include "Items/Item.h"
-#include "EnergyItem.generated.h"
+#include "HealthPickup.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class SLASH_API AEnergyItem : public AItem
+class SLASH_API AHealthPickup : public AItem
 {
 	GENERATED_BODY()
-
 protected:
 	virtual void OnSphereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) override;
 private:
-	UPROPERTY(EditAnywhere, Category = "Energy Properties")
-		float Energy;
+	UPROPERTY(EditAnywhere, Category = "Health Pickup Properties")
+	float HealthAmount;
 public:
-	FORCEINLINE float GetEnergy() const { return Energy; }
+	FORCEINLINE float GetHealthAmount() const { return HealthAmount; }
+
 };

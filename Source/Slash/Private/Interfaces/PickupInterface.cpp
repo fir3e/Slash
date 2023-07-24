@@ -20,3 +20,7 @@ void IPickupInterface::AddGold(ATreasure* Treasure)
 void IPickupInterface::AddEnergy(AEnergyItem* EnergyItem)
 {
 }
+
+void IPickupInterface::AddHealth(AHealthPickup* HealthPickup)
+{
+}

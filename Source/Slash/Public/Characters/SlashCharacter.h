@@ -44,6 +44,7 @@ public:
 	virtual void AddSouls(ASoul* Soul) override;
 	virtual void AddGold(ATreasure* Treasure) override;
 	virtual void AddEnergy(AEnergyItem* EnergyItem) override;
+	virtual void AddHealth(AHealthPickup* HealthPickup) override;
 	/** </IPickupInterface> */
 
 protected:

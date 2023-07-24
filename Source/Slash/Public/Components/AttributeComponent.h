@@ -52,6 +52,7 @@ public:
 	void ReceiveDamage(float Damage);
 	void UseStamina(float StaminaCost);
 	void AddEnergy(float Energy);
+	void AddHealth(float HealthAmount);
 	float GetHealthPercent();
 	float GetStaminaPercent();
 	bool IsAlive();
@@ -61,4 +62,5 @@ public:
 	FORCEINLINE int32 GetSouls() const { return Souls; }
 	FORCEINLINE float GetDodgeCost() const { return DodgeCost; }
 	FORCEINLINE float GetStamina() const { return Stamina; }
+	FORCEINLINE float GetHealth() const { return Health; }
 };
