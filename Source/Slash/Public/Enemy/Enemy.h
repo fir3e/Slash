@@ -81,14 +81,17 @@ private:
 	UPROPERTY(VisibleAnywhere)
 	UPawnSensingComponent* PawnSensing;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = Combat)
 	TSubclassOf<class AWeapon> WeaponClass;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = Combat)
 	double CombatRadius = 1000.f;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = Combat)
 	double AttackRadius = 150.f;
+
+	UPROPERTY(EditAnywhere, Category = Combat)
+	double AcceptanceRadius = 50.f;
 
 	UPROPERTY()
 	class AAIController* EnemyController;
@@ -100,7 +103,7 @@ private:
 	UPROPERTY(EditInstanceOnly, Category = "AI Navigation")
 	TArray<AActor*> PatrolTargets;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "AI Navigation")
 	double PatrolRadius = 200.f;
 
 	FTimerHandle PatrolTimer;
