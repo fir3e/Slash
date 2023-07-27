@@ -174,6 +174,7 @@ int32 ABaseCharacter::PlayDeathMontage()
 	if (Pose < EDeathPose::EDP_MAX)
 	{
 		DeathPose = Pose;
+		UE_LOG(LogTemp, Warning, TEXT("Poser"));
 	}
 
 	return Selection;
